@@ -1,0 +1,35 @@
+# The DGS plugin searches for *.graphql, *.graphiql files present in src/resources/schema
+type Book {
+    bookId: ID!
+    title: String!
+    publisher: String!
+    author: Author!
+    randomNumber: Int!
+    released: [ReleaseHistory!]!
+    downloaded: NonNegativeInt
+}
+
+type Author {
+    name: String!
+    originCountry: String!
+    addresses: [Address!]!
+}
+
+type Address {
+    street: String!
+    city: String!
+    zipCode: String!
+    country: String!
+}
+
+type ReleaseHistory {
+    releaseDate: Date!
+    printedEdition: Boolean!
+    releasedCountry: String!
+    publishedOn: Url!
+}
+
+input ReleaseHistoryInput {
+    afterYear: Date
+    printedEdition: Boolean
+}

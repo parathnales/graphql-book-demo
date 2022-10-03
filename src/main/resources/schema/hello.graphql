@@ -1,0 +1,5 @@
+# The DGS plugin searches for *.graphql, *.graphiql files present in src/resources/schema
+type Hello {
+    text: String!
+    randomNumber: Int!
+}

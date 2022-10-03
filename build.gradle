@@ -1,0 +1,46 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.4'
+	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+	id "com.netflix.dgs.codegen" version "5.3.1"
+	id 'java'
+}
+
+group = 'com.course'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+	maven {
+		url "https://plugins.gradle.org/m2/"
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//GraphQL
+	implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:latest.release"))
+	implementation 'com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter'
+	implementation 'com.netflix.graphql.dgs:graphql-dgs-extended-scalars'
+	implementation 'com.netflix.graphql.dgs:graphql-dgs-subscriptions-websockets-autoconfigure:latest.release'
+
+
+	//Faker
+	implementation ('com.github.javafaker:javafaker:1.0.2') { exclude module: 'org.yaml' }
+	implementation group: 'org.yaml', name: 'snakeyaml', version: '1.26'
+
+	implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+generateJava {
+	typeMapping = ["Date": "java.time.LocalDate",
+	"Url": "java.net.URL",
+	"NonNegativeInt": "java.lang.Integer"]
+}

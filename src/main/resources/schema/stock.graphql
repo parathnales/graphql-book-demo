@@ -1,0 +1,5 @@
+type Stock {
+    name: String!
+    publishedDate: Date!
+    price: NonNegativeInt!
+}

@@ -1,0 +1,25 @@
+# The DGS plugin searches for *.graphql, *.graphiql files present in src/resources/schema
+
+#scalars these only need to declare them in the main graphql file
+scalar Date
+scalar Url
+scalar NonNegativeInt
+
+type Query {
+    allHellos: [Hello]
+    oneHello: Hello
+    books(author: String): [Book]
+    booksByReleaseHistory(releaseHistoryInput: ReleaseHistoryInput!): [Book]
+}
+
+type Subscription {
+    randomStock: Stock!
+}
+
+# This is optional if your type name is Query and Mutation.
+# If you use the different type names for better business functional understanding, then you ned to define the below Schema and provide appropriate references.
+
+schema {
+    query: Query
+    subscription: Subscription
+}
